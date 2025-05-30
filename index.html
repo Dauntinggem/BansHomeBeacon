@@ -1,105 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Beban’s Music Lounge</title>
-  <style>
-    body {
-      background: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-
-    h1 {
-      color: #00ffe1;
-      margin-bottom: 30px;
-    }
-
-    #playlist {
-      max-width: 600px;
-      margin: 0 auto 30px;
-      text-align: left;
-    }
-
-    .song {
-      padding: 10px;
-      background: #222;
-      margin: 5px;
-      border-left: 5px solid transparent;
-      border-radius: 5px;
-    }
-
-    .song.active {
-      background: #333;
-      border-left-color: #00ffe1;
-      font-weight: bold;
-    }
-
-    audio {
-      width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.8rem;
-      color: #888;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your GitHub Landing Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .github-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .github-link:hover {
+            background-color: #0056b3;
+        }
+        .music-player {
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            color: #ffffff;
+            border: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Welcome to My GitHub Page</h1>
+        <p>Explore my projects and listen to some tunes!</p>
+        <a href="https://github.com/Dauntinggem" class="https://github.com/Dauntinggem">Visit My GitHub</a>
+        
+        <div class="music-player">
+            <h2>Music Player</h2>
+            <select id="musicSelect" onchange="changeTrack()">
+                <option value="">Select a track</option>
+                <!-- Music files will be populated dynamically -->
+            </select>
+            <audio id="audioPlayer" controls>
+                <source src="/music/Realiti.mp3" type=audio/mpeg"
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
 
-  <h1>🎶 Beban’s Music Lounge</h1>
+    <script>
+        // List of music files in the /music/ folder (update with your actual files)
+        const musicFiles = [
+            'music/Realiti.mp3',
+            'music/PlayboiCardiRIP.mp3',
+            'music/Assets_No_Introduction.mp3
+.mp3'
+            // Add your music files here, e.g., 'music/your-song.mp3'
+        ];
 
-  <div id="playlist"></div>
+        const musicSelect = document.getElementById('musicSelect');
+        const audioPlayer = document.getElementById('audioPlayer');
 
-  <audio id="audioPlayer" controls autoplay></audio>
+        // Populate the dropdown with music files
+        musicFiles.forEach(file => {
+            const option = document.createElement('option');
+            option.value = file;
+            option.textContent = file.split('/').pop(); // Display just the file name
+            musicSelect.appendChild(option);
+        });
 
-  <footer>Made with 🔥 by Beban</footer>
-
-  <script>
-    const playlist = [
-      {
-        title: "Panic! at the Disco – But It’s Better If You Do / I Write Sins",
-        file: "music/Panic! at the Disco - But It's Better If You Do I Write Sins Not Tragedies (1).mp3"
-      },
-      { title: "Realiti", file: "music/Realiti.mp3" },
-      { title: "Assets_No_Introduction", file: "music/Assets_No_Introduction.mp3" }
-    ];
-
-    const player = document.getElementById("audioPlayer");
-    const playlistDiv = document.getElementById("playlist");
-    let current = 0;
-
-    function showPlaylist() {
-      playlistDiv.innerHTML = "";
-      playlist.forEach((song, i) => {
-        const songEl = document.createElement("div");
-        songEl.className = "song" + (i === current ? " active" : "");
-        songEl.textContent = song.title;
-        playlistDiv.appendChild(songEl);
-      });
-    }
-
-    function play(index) {
-      current = index;
-      player.src = playlist[current].file;
-      player.play();
-      showPlaylist();
-    }
-
-    player.addEventListener("ended", () => {
-      current = (current + 1) % playlist.length;
-      play(current);
-    });
-
-    // Start
-    showPlaylist();
-    play(current);
-  </script>
-
+        // Change track when a new option is selected
+        function changeTrack() {
+            const selectedTrack = musicSelect.value;
+            if (selectedTrack) {
+                audioPlayer.src = selectedTrack;
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+                audioPlayer.src = '';
+            }
+        }
+    </script>
 </body>
 </html>
