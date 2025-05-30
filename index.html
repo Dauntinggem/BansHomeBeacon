@@ -1,67 +1,105 @@
-# 🎨 Esteban Martinez
-<div id="audio-player" style="
-  max-width: 400px;
-  width: 90vw;
-  margin: 2rem auto;
-  padding: 1rem;
-  background: #222;
-  border-radius: 10px;
-  font-family: monospace;
-  color: #0f0;
-  box-sizing: border-box;
-">
-  <audio id="audio" controls style="width: 100%;">
-    <source src="music/Panic! at the Disco - But It's Better If You Do I Write Sins Not Tragedies (1).mp3" type="audio/mpeg">
-  </audio>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Beban’s Music Lounge</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
 
+    h1 {
+      color: #00ffe1;
+      margin-bottom: 30px;
+    }
 
-### Product-Minded PMA • Designer • Builder of Cool Things
+    #playlist {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      text-align: left;
+    }
 
-Hey there! I’m Esteban — part creative, part builder, part mischief. I like turning chaos into sleek design and scrappy ideas into living, breathing products.
+    .song {
+      padding: 10px;
+      background: #222;
+      margin: 5px;
+      border-left: 5px solid transparent;
+      border-radius: 5px;
+    }
 
----
+    .song.active {
+      background: #333;
+      border-left-color: #00ffe1;
+      font-weight: bold;
+    }
 
-## 🚧 Currently
+    audio {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
 
-- 🛠️ Building: [CoolProject](https://github.com/yourusername/CoolProject) — something kinda cool, kinda insane
-- 🌱 Learning: German 🇩🇪, systems thinking, and probably how not to burn toast
-- 🎭 Personality: 80% curiosity, 15% caffeine, 5% bad ideas (that sometimes work)
+    footer {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
 
----
+  <h1>🎶 Beban’s Music Lounge</h1>
 
-## 🚀 Projects Worth Clicking
+  <div id="playlist"></div>
 
-- [🌐 Personal Website](https://yourwebsite.com)  
-  Where I pretend I know what I’m doing.
+  <audio id="audioPlayer" controls autoplay></audio>
 
-- [📱 App Name](https://github.com/yourusername/app-name)  
-  It solves a problem. I promise.
+  <footer>Made with 🔥 by Beban</footer>
 
-- [🛠️ Tools I Built](https://github.com/yourusername/tools)  
-  Scripts, hacks, and utilities from the vault.
+  <script>
+    const playlist = [
+      {
+        title: "Panic! at the Disco – But It’s Better If You Do / I Write Sins",
+        file: "music/Panic! at the Disco - But It's Better If You Do I Write Sins Not Tragedies (1).mp3"
+      },
+      { title: "Realiti", file: "music/Realiti.mp3" },
+      { title: "Assets_No_Introduction", file: "music/Assets_No_Introduction.mp3" }
+    ];
 
----
-
-## 📫 Find Me on the Internet
-
-- 💼 [LinkedIn](https://linkedin.com/in/yourname)
-- 🐦 [Twitter](https://twitter.com/yourhandle)
-- 🌍 [Portfolio](https://yourwebsite.com)
-
----
-
-> “Make it work, make it beautiful, make it weird.” — me, probably
-
-    let currentSong = 0;
     const player = document.getElementById("audioPlayer");
+    const playlistDiv = document.getElementById("playlist");
+    let current = 0;
 
-    function playPlaylist() {
-      player.src = playlist[currentSong];
+    function showPlaylist() {
+      playlistDiv.innerHTML = "";
+      playlist.forEach((song, i) => {
+        const songEl = document.createElement("div");
+        songEl.className = "song" + (i === current ? " active" : "");
+        songEl.textContent = song.title;
+        playlistDiv.appendChild(songEl);
+      });
+    }
+
+    function play(index) {
+      current = index;
+      player.src = playlist[current].file;
       player.play();
+      showPlaylist();
+    }
 
-      player.onended = () => {
-        currentSong = (currentSong + 1) % playlist.length;
-        player.src = playlist[currentSong];
-        player.play();
-      };
+    player.addEventListener("ended", () => {
+      current = (current + 1) % playlist.length;
+      play(current);
+    });
+
+    // Start
+    showPlaylist();
+    play(current);
+  </script>
+
+</body>
+</html>
