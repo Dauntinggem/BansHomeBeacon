@@ -40,19 +40,24 @@ Hey there! I’m Esteban — part creative, part builder, part mischief. I like 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Music Site</title>
+  <meta charset="UTF-8">
+  <title>My Music Playlist</title>
 </head>
 <body>
-  <h1>Welcome to My Site</h1>
-  <button onclick="playPlaylist()">Play Music</button>
-  
+  <h1>🎶 Welcome to My Music Page 🎶</h1>
+
+  <!-- Play Button -->
+  <button onclick="playPlaylist()">▶️ Play</button>
+
+  <!-- Audio Player -->
   <audio id="audioPlayer" controls></audio>
 
+  <!-- Playlist JavaScript -->
   <script>
     const playlist = [
-      "audio/song1.mp3",
-      "audio/song2.mp3"
+      "music/Panic! at the Disco - But It's Better If You Do I Write Sins Not Tragedies (1).mp3",
+      "music/Realiti.mp3",
+      "music/Did It First.mp3"
     ];
 
     let currentSong = 0;
