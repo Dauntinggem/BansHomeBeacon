@@ -76,3 +76,11 @@ Hey there! I’m Esteban — part creative, part builder, part mischief. I like 
   </script>
 </body>
 </html>
+
+<button id="playButton">Play Audio</button>
+<audio id="audioPlayer" src="assets/music/your-audio-file.mp3"></audio>
+document.getElementById('playButton').addEventListener('click', function() {
+  var audio = document.getElementById('audioPlayer');
+  audio.play();
+});
+
