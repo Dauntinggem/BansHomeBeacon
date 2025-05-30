@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://dauntinggem.github.io/BansHomeBeacon/" alt="Esteban Martinez" width="100%" />
-</p>
+  <img src="https://dauntinggem.github.io/BansHomeBeacon/Assets/Familia.jpeg" alt="Esteban Martinez" width="100%" />
+<p align="center">
 
 # 🎨 Esteban Martinez
 
