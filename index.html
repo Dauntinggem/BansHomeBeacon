@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BansHomeBeacon</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <canvas id="matrixCanvas"></canvas>
-
-  <div class="content">
-    <button id="playButton">▶️ Play Audio</button>
-    <audio id="audioPlayer" src="assets/music/your-audio-file.mp3"></audio>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
 # 🎨 Esteban Martinez
+<div id="audio-player" style="
+  max-width: 400px;
+  width: 90vw;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #222;
+  border-radius: 10px;
+  font-family: monospace;
+  color: #0f0;
+  box-sizing: border-box;
+">
+  <audio id="audio" controls style="width: 100%;">
+    <source src="Panic! at the Disco - But It's Better If You Do I Write Sins Not Tragedies (1).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
 
 ### Product-Minded PMA • Designer • Builder of Cool Things
 
@@ -56,29 +54,6 @@ Hey there! I’m Esteban — part creative, part builder, part mischief. I like 
 
 > “Make it work, make it beautiful, make it weird.” — me, probably
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My Music Playlist</title>
-</head>
-<body>
-  <h1>🎶 Welcome to My Music Page 🎶</h1>
-
-  <!-- Play Button -->
-  <button onclick="playPlaylist()">▶️ Play</button>
-
-  <!-- Audio Player -->
-  <audio id="audioPlayer" controls></audio>
-
-  <!-- Playlist JavaScript -->
-  <script>
-    const playlist = [
-      "music/Panic! at the Disco - But It's Better If You Do I Write Sins Not Tragedies (1).mp3",
-      "music/Realiti.mp3",
-      "music/Did It First.mp3"
-    ];
-
     let currentSong = 0;
     const player = document.getElementById("audioPlayer");
 
@@ -102,4 +77,75 @@ document.getElementById('playButton').addEventListener('click', function() {
   var audio = document.getElementById('audioPlayer');
   audio.play();
 });
+
+<!-- MATRIX BACKGROUND CANVAS -->
+<canvas id="matrix"></canvas>
+
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden;
+    background: black;
+  }
+  #matrix {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Behind everything */
+    pointer-events: none; /* Let clicks pass through */
+    display: block;
+  }
+</style>
+
+<script>
+  (() => {
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const letters = 'アァイィウヴエォカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const fontSize = 16;
+    const columns = Math.floor(window.innerWidth / fontSize);
+
+    const drops = new Array(columns).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > window.innerHeight && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    function animate() {
+      draw();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+</script>
 
