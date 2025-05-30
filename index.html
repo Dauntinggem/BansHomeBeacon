@@ -71,8 +71,7 @@
         <div class="music-player">
             <h2>Music Player</h2>
             <select id="musicSelect" onchange="changeTrack()">
-                <option value="">Select a track</option>
-                <!-- Music files will be populated dynamically -->
+                <option value="">Select a track</option> <br>
             </select>
             <audio id="audioPlayer" controls>
                 <source src="/music/Realiti.mp3" type=audio/mpeg"
@@ -82,27 +81,21 @@
     </div>
 
     <script>
-        // List of music files in the /music/ folder (update with your actual files)
         const musicFiles = [
             'music/Realiti.mp3',
             'music/PlayboiCardiRIP.mp3',
             'music/Assets_No_Introduction.mp3
 .mp3'
-            // Add your music files here, e.g., 'music/your-song.mp3'
         ];
 
         const musicSelect = document.getElementById('musicSelect');
-        const audioPlayer = document.getElementById('audioPlayer');
-
-        // Populate the dropdown with music files
+        const audioPlayer = document.getElementById('audioPlayer'); <br>
         musicFiles.forEach(file => {
             const option = document.createElement('option');
             option.value = file;
-            option.textContent = file.split('/').pop(); // Display just the file name
+            option.textContent = file.split('/').pop(); 
             musicSelect.appendChild(option);
-        });
-
-        // Change track when a new option is selected
+        }); <br>
         function changeTrack() {
             const selectedTrack = musicSelect.value;
             if (selectedTrack) {
