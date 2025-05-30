@@ -37,3 +37,37 @@ Hey there! I’m Esteban — part creative, part builder, part mischief. I like 
 
 > “Make it work, make it beautiful, make it weird.” — me, probably
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Music Site</title>
+</head>
+<body>
+  <h1>Welcome to My Site</h1>
+  <button onclick="playPlaylist()">Play Music</button>
+  
+  <audio id="audioPlayer" controls></audio>
+
+  <script>
+    const playlist = [
+      "audio/song1.mp3",
+      "audio/song2.mp3"
+    ];
+
+    let currentSong = 0;
+    const player = document.getElementById("audioPlayer");
+
+    function playPlaylist() {
+      player.src = playlist[currentSong];
+      player.play();
+
+      player.onended = () => {
+        currentSong = (currentSong + 1) % playlist.length;
+        player.src = playlist[currentSong];
+        player.play();
+      };
+    }
+  </script>
+</body>
+</html>
